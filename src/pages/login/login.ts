@@ -26,7 +26,9 @@ export class LoginPage {
   }
  
   signin() {
+    this.appService.presentLoadingDefault("Authenticating...");
     this.authService.login(this.credentials).then((res) => {
+      this.appService.hideLoadingDefault();
       if (!res.code) {
         this.navCtrl.setRoot("TabsPage");
       } else {

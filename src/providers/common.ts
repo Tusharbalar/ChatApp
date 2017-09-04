@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
-import { AlertController } from "ionic-angular";
+import { AlertController, LoadingController } from "ionic-angular";
 
 @Injectable()
 export class AppProvider {
 
-  constructor(private alertCtrl: AlertController) {
+  loading;
+
+  constructor(private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController) {
     
   }
 
@@ -15,6 +18,18 @@ export class AppProvider {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  presentLoadingDefault(msg) {
+    this.loading = this.loadingCtrl.create({
+      content: msg
+    });
+  
+    this.loading.present();
+  }
+
+  hideLoadingDefault() {
+    this.loading.dismiss();
   }
 
 }
