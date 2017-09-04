@@ -10,6 +10,8 @@ import { config } from './app.firebaseconfig';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
+import { AuthProvider } from '../providers/auth/auth';
+import { AppProvider } from "../providers/common";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AngularFireModule } from 'angularfire2';
     StatusBar,
     SplashScreen,
     AngularFireAuth,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    AppProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}
