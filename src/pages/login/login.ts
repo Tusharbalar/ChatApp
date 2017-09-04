@@ -13,7 +13,10 @@ import { AppProvider } from "../../providers/common";
 
 export class LoginPage {
 
-  credentials = {} as usercreds;
+  credentials = {
+    email: "test@gmail.com",
+    password: "abc123"
+  } as usercreds;
 
   constructor(public authService: AuthProvider,
               public navCtrl: NavController,

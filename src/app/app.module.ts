@@ -19,7 +19,9 @@ import { AppProvider } from "../providers/common";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsPlacement: 'top'
+    }),
     AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
