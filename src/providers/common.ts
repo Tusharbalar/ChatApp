@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AlertController, LoadingController } from "ionic-angular";
+import { AlertController, LoadingController, ToastController } from "ionic-angular";
 
 @Injectable()
 export class AppProvider {
@@ -7,6 +7,7 @@ export class AppProvider {
   loading;
 
   constructor(private alertCtrl: AlertController,
+              private toastCtrl: ToastController,
               private loadingCtrl: LoadingController) {
     
   }
@@ -30,6 +31,15 @@ export class AppProvider {
 
   hideLoadingDefault() {
     this.loading.dismiss();
+  }
+
+  showToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

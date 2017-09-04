@@ -12,6 +12,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AuthProvider } from '../providers/auth/auth';
 import { AppProvider } from "../providers/common";
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AppProvider } from "../providers/common";
     AngularFireAuth,
     AppProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    UserProvider
   ]
 })
 export class AppModule {}

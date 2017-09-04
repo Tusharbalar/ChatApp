@@ -43,6 +43,11 @@ export class LoginPage {
   }
 
   signup() {
+    this.navCtrl.push("SignupPage");
+  }
+
+  passwordreset() {
+    this.navCtrl.push('PasswordresetPage');
   }
 
 }
