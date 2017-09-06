@@ -24,10 +24,6 @@ export class LoginPage {
               public navParams: NavParams) {
   }
  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
- 
   signin() {
     this.appService.presentLoadingDefault("Authenticating...");
     this.authService.login(this.credentials).then((res) => {

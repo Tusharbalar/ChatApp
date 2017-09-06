@@ -14,6 +14,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { AppProvider } from "../providers/common";
 import { UserProvider } from '../providers/user/user';
 import { ImghandlerProvider } from '../providers/imghandler/imghandler';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ImghandlerProvider } from '../providers/imghandler/imghandler';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     UserProvider,
-    ImghandlerProvider
+    ImghandlerProvider,
+    Camera
   ]
 })
 export class AppModule {}

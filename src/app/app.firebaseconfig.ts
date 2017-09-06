@@ -3,6 +3,6 @@ export var config = {
   authDomain: "chatapp-f5d34.firebaseapp.com",
   databaseURL: "https://chatapp-f5d34.firebaseio.com",
   projectId: "chatapp-f5d34",
-  storageBucket: "",
+  storageBucket: "gs://chatapp-f5d34.appspot.com",
   messagingSenderId: "318967671858"
 };

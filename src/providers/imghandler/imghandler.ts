@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import firebase from 'firebase';
+import { Camera } from "@ionic-native/camera";
 
-/*
-  Generated class for the ImghandlerProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class ImghandlerProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello ImghandlerProvider Provider');
+  constructor(private camera: Camera) {
+  }
+
+  public imageUpload() {
+    var promise = new Promise((resolve, reject) => {
+      this.camera.getPicture({
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true
+      }).then((imagedata) => {
+        firebase.storage().ref('/profileimages').child(firebase.auth().currentUser.uid)
+          .putString(imagedata, 'base64', {contentType: 'image/png'})
+          .then(savePic => {
+            resolve(savePic.downloadURL);
+          }).catch((err) => {
+            reject(err);
+          });
+      });
+    });
+    return promise;
   }
 
 }
