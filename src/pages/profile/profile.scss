@@ -28,14 +28,11 @@ page-profile {
       left: 10px;
     }
   }
-  .button-ios.activated {
+  .button-ios.activated,
+  .button-md.activated {
     background-color: transparent !important;
   }
-  .btn_img {
-    width: 25%;
-    position: absolute;
-    left: 59%;
-    top: 9%;
-    font-size: 33px;
+  .button-md {
+    box-shadow: none;
   }
 }

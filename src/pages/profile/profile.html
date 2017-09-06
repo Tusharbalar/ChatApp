@@ -4,10 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <button ion-button icon-right (click)="editImage()" class="btn_transparent btn_img">
-    <i class="fa fa-pencil" style="color: rgba(37, 28, 28, 0.58);"></i>
-  </button>
-  <div class="profile-image">
+  <div class="profile-image" (click)="editImage()">
     <img src="{{avatar}}">
   </div>
   <ion-grid>
@@ -15,7 +12,8 @@
       <ion-col>
         <button ion-button icon-right (click)="editName()" class="btn_transparent">
           <b>{{displayName}}</b>&nbsp;
-          <i class="fa fa-pencil"></i>
+          <i class="fa fa-pencil" *ngIf="!isEditName"></i>
+          <ion-spinner *ngIf="isEditName"></ion-spinner>
         </button>
       </ion-col>
     </ion-row>
