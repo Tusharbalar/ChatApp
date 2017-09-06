@@ -3,6 +3,7 @@ import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { UserProvider } from "../../providers/user/user";
 import { AppProvider } from "../../providers/common";
 import { AngularFireAuth } from "angularfire2/auth";
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -76,7 +77,9 @@ export class ProfilePage {
   }
 
   logout() {
-
+    firebase.auth().signOut().then(() => {
+      this.navCtrl.setRoot("LoginPage");
+    });
   }
 
 }
