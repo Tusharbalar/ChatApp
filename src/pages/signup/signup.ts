@@ -42,7 +42,7 @@ export class SignupPage {
       this.userService.adduser(this.newuser).then((res: any) => {
         this.appService.hideLoadingDefault();
         if (res.success) {
-          this.navCtrl.push("ProfilePage");
+          this.navCtrl.push("ProfilePicPage");
         } else {
           const title = "Login Error";
           const subTitle = res;

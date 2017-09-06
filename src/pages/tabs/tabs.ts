@@ -13,5 +13,4 @@ export class TabsPage {
   tab2: string = "GroupsPage";
   tab3: string = "ProfilePage";
 
-
 }

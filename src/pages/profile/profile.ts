@@ -1,7 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
-import { AppProvider } from "../../providers/common";
-import { ImghandlerProvider } from "../../providers/imghandler/imghandler";
+import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
@@ -9,50 +7,68 @@ import { UserProvider } from "../../providers/user/user";
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
+
 export class ProfilePage {
 
-  moveon = true;
-  imgurl: string = "https://static1.squarespace.com/static/557d1981e4b097936a86b629/t/558cf487e4b05d368538793a/1435301000191/";
+  avatar: string;
+  displayName: string;
 
-  constructor(private appService: AppProvider,
-              private imageHandler: ImghandlerProvider,
-              private navCtrl: NavController,
-              private userService: UserProvider,
-              private zone: NgZone) {
+  constructor(public navCtrl: NavController,
+              public alertCtrl: AlertController,
+              public zone: NgZone,
+              public userService: UserProvider) {
   }
 
-  chooseImage() {
-    this.appService.presentLoadingDefault("Please Wait...");
-    this.imageHandler.imageUpload().then((data: any) => {
-      this.appService.hideLoadingDefault();
-      this.zone.run(() => {
-        this.imgurl = data;
-        this.moveon = false;
-      });
+  ionViewWillEnter() {
+    this.getUserDetails();
+  }
+
+  getUserDetails() {
+    this.userService.getUserDetails().then((res: any) => {
+      this.displayName = res.displayName;
+      console.log("SSSS", res, res.displayName);
+      this.avatar = res.photoURL;
     }).catch((err) => {
-      this.appService.hideLoadingDefault();
-      const title = "Error";
-      const subTitle = err;
-      this.appService.presentAlert(title, subTitle);
-    });
+      console.log("err", err);
+    })
   }
 
-  updateproceed() {
-    this.appService.presentLoadingDefault("Image Uploading...");
-    this.userService.updateimage(this.imgurl).then((res: any) => {
-      this.appService.hideLoadingDefault();
-      if (res.success) {
-        this.navCtrl.setRoot('TabsPage');
-      } else {
-        const title = "Error";
-        const subTitle = res;
-        this.appService.presentAlert(title, subTitle);
-      }
+  editName() {
+    let prompt = this.alertCtrl.create({
+      title: 'Edit Nickname',
+      message: "Enter a name for this new album you're so keen on adding",
+      inputs: [{
+        name: 'newName',
+        value: this.displayName
+      }],
+      buttons: [{
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      }, {
+        text: 'Save',
+        handler: data => {
+          console.log('Saved clicked', data);
+          this.displayName = data.newName;
+          this.userService.editNickName(data.newName).then((res: any) => {
+            console.log("AAA", res);
+            if (res.success) {
+
+            } else {
+              
+            }
+          }).catch((err) => {
+            console.log("err", err);
+          })
+        }
+      }]
     });
+    prompt.present();
   }
- 
-  proceed() {
-    this.navCtrl.setRoot('TabsPage');
+
+  logout() {
+
   }
 
 }
