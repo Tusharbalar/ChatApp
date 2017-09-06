@@ -8,7 +8,6 @@ export class UserProvider {
   firedata = firebase.database().ref('/users');
 
   constructor(public angularFireAuth: AngularFireAuth) {
-    console.log('Hello UserProvider Provider');
   }
 
   adduser(newuser) {
