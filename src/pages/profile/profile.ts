@@ -56,7 +56,7 @@ export class ProfilePage {
             if (res.success) {
 
             } else {
-              
+
             }
           }).catch((err) => {
             console.log("err", err);
@@ -65,6 +65,10 @@ export class ProfilePage {
       }]
     });
     prompt.present();
+  }
+
+  editImage() {
+    
   }
 
   logout() {

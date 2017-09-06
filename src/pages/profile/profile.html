@@ -1,18 +1,25 @@
 <ion-header>
   <ion-navbar color="hcolor">
-    <ion-title>Profiles</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div class="profile-image" (click)="editimage()">
+  <button ion-button icon-right (click)="editImage()" class="btn_transparent btn_img">
+    <i class="fa fa-pencil" style="color: rgba(37, 28, 28, 0.58);"></i>
+  </button>
+  <div class="profile-image">
     <img src="{{avatar}}">
   </div>
-  <div (click)="editName()">
-    <h2>{{displayName}}</h2>
-  </div>
-  <div>
-    Tap on your pic or nick name to change it.
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-right (click)="editName()" class="btn_transparent">
+          <b>{{displayName}}</b>&nbsp;
+          <i class="fa fa-pencil"></i>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <div class="spacer" style="height: 10px;"></div>
   <div>
     <button ion-button round outline color="danger" (click)="logout()">Logout</button>

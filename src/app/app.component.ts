@@ -13,9 +13,9 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   constructor(private angularFireAuth: AngularFireAuth,
-              private platform: Platform,
-              private statusBar: StatusBar,
-              private splashScreen: SplashScreen) {
+              platform: Platform,
+              statusBar: StatusBar,
+              splashScreen: SplashScreen) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();

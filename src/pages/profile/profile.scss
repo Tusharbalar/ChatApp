@@ -17,4 +17,25 @@ page-profile {
     justify-content: center;
     text-align: center;
   }
+  .btn_transparent {
+    background-color: transparent;
+    color: black;
+    font-size: 21px;
+    i {
+      color: rgba(37, 28, 28, 0.58);
+      bottom: 3px;
+      position: relative;
+      left: 10px;
+    }
+  }
+  .button-ios.activated {
+    background-color: transparent !important;
+  }
+  .btn_img {
+    width: 25%;
+    position: absolute;
+    left: 59%;
+    top: 9%;
+    font-size: 33px;
+  }
 }
