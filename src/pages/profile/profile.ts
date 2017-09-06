@@ -28,10 +28,13 @@ export class ProfilePage {
   }
 
   getUserDetails() {
+    this.appService.presentLoadingDefault("Loading Profile Data...");
     this.userService.getUserDetails().then((res: any) => {
+      this.appService.hideLoadingDefault();
       this.displayName = res.displayName;
       this.avatar = res.photoURL;
     }).catch((err) => {
+      this.appService.hideLoadingDefault();
       console.log("err", err);
     })
   }
