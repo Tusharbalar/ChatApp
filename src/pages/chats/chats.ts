@@ -30,4 +30,11 @@ export class ChatsPage {
     this.navCtrl.push('BuddiesPage');
   }
 
+  ignore(buddy) {
+    console.log(buddy);
+    this.requestService.deleteRequest(buddy).then((res) => {
+      console.log(res)
+    })
+  }
+
 }

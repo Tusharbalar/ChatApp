@@ -42,7 +42,6 @@ export class RequestsProvider {
         this.userDetails = [];
         myRequests.forEach((request, index) => {
           allUsers.forEach((user, index2) => {
-            console.log("2", myRequests[index], allUsers[index2].uid)
             if (myRequests[index] === allUsers[index2].uid) {
               this.userDetails.push(allUsers[index2]);
             }
@@ -51,6 +50,24 @@ export class RequestsProvider {
         this.events.publish("gotrequests");
       });
     });
+  }
+
+  deleteRequest(buddy) {
+    var promise = new Promise((resolve, reject) => {
+      this.firereq.child(firebase.auth().currentUser.uid).orderByChild("sender").once("value", (snapshot) => {
+        console.log("SAS", snapshot.val());
+        let somekey;
+        for (var key in snapshot.val()) {
+          somekey = key;
+        }
+        this.firereq.child(firebase.auth().currentUser.uid).child(somekey).remove().then(() => {
+          resolve(true);
+        }).catch((err) => {
+          reject(err);
+        });
+      });
+    });
+    return promise;
   }
 
 }
