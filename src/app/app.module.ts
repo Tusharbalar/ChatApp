@@ -13,7 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AuthProvider } from '../providers/auth/auth';
 import { AppProvider } from "../providers/common";
 import { UserProvider } from '../providers/user/user';
-import { ImghandlerProvider } from '../providers/imghandler/imghandler';
+import { ImageHandlerProvider } from '../providers/imghandler/imghandler';
 import { Camera } from '@ionic-native/camera';
 
 @NgModule({
@@ -39,7 +39,7 @@ import { Camera } from '@ionic-native/camera';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     UserProvider,
-    ImghandlerProvider,
+    ImageHandlerProvider,
     Camera
   ]
 })

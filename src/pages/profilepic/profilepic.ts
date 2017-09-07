@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { AppProvider } from "../../providers/common";
-import { ImghandlerProvider } from "../../providers/imghandler/imghandler";
+import { ImageHandlerProvider } from "../../providers/imghandler/imghandler";
 import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
@@ -15,7 +15,7 @@ export class ProfilePicPage {
   imgurl: string = "https://static1.squarespace.com/static/557d1981e4b097936a86b629/t/558cf487e4b05d368538793a/1435301000191/";
 
   constructor(private appService: AppProvider,
-              private imageHandler: ImghandlerProvider,
+              private imageHandler: ImageHandlerProvider,
               private navCtrl: NavController,
               private userService: UserProvider,
               private zone: NgZone) {

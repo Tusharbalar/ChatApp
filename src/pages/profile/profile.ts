@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { UserProvider } from "../../providers/user/user";
 import { AppProvider } from "../../providers/common";
 import { AngularFireAuth } from "angularfire2/auth";
 import firebase from 'firebase';
+import { ImageHandlerProvider } from "../../providers/imghandler/imghandler";
 
 @IonicPage()
 @Component({
@@ -21,6 +22,8 @@ export class ProfilePage {
               public alertCtrl: AlertController,
               public appService: AppProvider,
               public angularFireAuth: AngularFireAuth,
+              public imageHandler: ImageHandlerProvider,
+              private loadingCtrl: LoadingController,
               public userService: UserProvider) {
   }
 
@@ -32,11 +35,17 @@ export class ProfilePage {
     this.appService.presentLoadingDefault("Loading Profile Data...");
     this.userService.getUserDetails().then((res: any) => {
       this.appService.hideLoadingDefault();
-      this.displayName = res.displayName;
-      this.avatar = res.photoURL;
+      if (res) {
+        this.displayName = res.displayName;
+        this.avatar = res.photoURL;
+      } else {
+        this.displayName = this.angularFireAuth.auth.currentUser.displayName;
+        this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
+      }
     }).catch((err) => {
       this.appService.hideLoadingDefault();
-      console.log("err", err);
+      this.displayName = this.angularFireAuth.auth.currentUser.displayName;
+      this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
     })
   }
 
@@ -73,7 +82,30 @@ export class ProfilePage {
   }
 
   editImage() {
-
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait...",
+      duration: 2000
+    });
+    loading.present();
+    this.imageHandler.imageUpload().then((url: any) => {
+      this.appService.presentLoadingDefault("Please Wait...");
+      this.userService.updateimage(url).then((res: any) => {
+        this.appService.hideLoadingDefault();
+        this.avatar = url;
+      }).catch((err) => {
+        this.appService.hideLoadingDefault();
+        const title = "Error";
+        const subTitle = err;
+        this.appService.presentAlert(title, subTitle);
+        this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
+      });
+    }).catch((err) => {
+      // this.appService.hideLoadingDefault();
+      const title = "Error";
+      const subTitle = err;
+      this.appService.presentAlert(title, subTitle);
+      this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
+    });
   }
 
   logout() {

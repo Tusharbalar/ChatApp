@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { Camera } from "@ionic-native/camera";
 
 @Injectable()
-export class ImghandlerProvider {
+export class ImageHandlerProvider {
 
   constructor(private camera: Camera) {
   }
