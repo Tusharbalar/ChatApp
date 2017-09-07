@@ -7,7 +7,10 @@ import { UserProvider } from "../../providers/user/user";
   selector: 'page-buddies',
   templateUrl: 'buddies.html',
 })
+
 export class BuddiesPage {
+
+  users: any;
 
   constructor(public navCtrl: NavController,
               public userService: UserProvider) {
@@ -15,7 +18,7 @@ export class BuddiesPage {
 
   ionViewWillEnter() {
     this.userService.getAllUsers().then((res) => {
-      console.log(res);
+      this.users = res;
     });
   }
 
