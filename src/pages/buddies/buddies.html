@@ -2,6 +2,10 @@
   <ion-navbar color="hcolor">
     <ion-title>All Buddies</ion-title>
   </ion-navbar>
+  <ion-toolbar color="hcolor" no-border-top>
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="searchBuddy($event)" placeholder="Search buddy">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-list>
