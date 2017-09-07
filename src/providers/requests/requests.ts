@@ -35,11 +35,11 @@ export class RequestsProvider {
       myRequests = [];
       // if (myRequests.length == 0) { return; }
       for (var i in allRequests) {
-        console.log("sdsdas", myRequests, allRequests[i])
         myRequests.push(allRequests[i].sender);
       }
       this.userService.getAllUsers().then((users) => {
         let allUsers: any = users;
+        this.userDetails = [];
         myRequests.forEach((request, index) => {
           allUsers.forEach((user, index2) => {
             console.log("2", myRequests[index], allUsers[index2].uid)
