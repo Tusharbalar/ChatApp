@@ -3,4 +3,7 @@ page-buddies {
     width: 45px;
     height: 45px;
   }
+  .back-button.show-back-button {
+    z-index: 9;
+  }
 }
