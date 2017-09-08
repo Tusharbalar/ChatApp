@@ -95,9 +95,10 @@ export class RequestsProvider {
   }
 
   getMyFriends() {
-    this.firefriends.child(firebase.auth().currentUser.uid).once("value", (snapshot) => {
+    let friends_uid = [];
+    this.firefriends.child(firebase.auth().currentUser.uid).on("value", (snapshot) => {
       let allFriends = snapshot.val();
-      let friends_uid = [];
+      friends_uid = [];
       for(let i in allFriends) {
         friends_uid.push(allFriends[i].uid);
       }
