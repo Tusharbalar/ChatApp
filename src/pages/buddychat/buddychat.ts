@@ -1,5 +1,5 @@
-import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { ChatProvider } from "../../providers/chat/chat";
 import firebase from "firebase";
 
@@ -14,7 +14,9 @@ export class BuddychatPage {
   buddy: any;
   newMessage;
   photoURL;
-  allMessages = [];
+  allMessages;
+
+  @ViewChild('content') content: Content;
 
   constructor(public navCtrl: NavController,
               private chatService: ChatProvider,
@@ -22,12 +24,9 @@ export class BuddychatPage {
               private zone: NgZone,
               public navParams: NavParams) {
     this.buddy = this.chatService.buddy;
-  }
-
-  ionViewWillEnter() {
     this.photoURL = firebase.auth().currentUser.photoURL;
-    this.chatService.getBuddyMessages();
-    this.events.subscribe("newmessage", () => {
+    this.scrollto();
+    this.events.subscribe('newmessage', () => {
       this.allMessages = [];
       this.zone.run(() => {
         this.allMessages = this.chatService.buddyMessages;
@@ -35,14 +34,21 @@ export class BuddychatPage {
     });
   }
 
+  ionViewDidEnter() {
+    this.chatService.getBuddyMessages();
+  }
+
   addMessage() {
     this.chatService.addNewMessage(this.newMessage).then(() => {
       this.newMessage = "";
+      this.content.scrollToBottom();
     });
   }
 
-  getAllMessages() {
-
+  scrollto() {
+    setTimeout(() => {
+      this.content.scrollToBottom();
+    }, 1000);
   }
 
 }
