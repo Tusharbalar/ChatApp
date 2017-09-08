@@ -10,7 +10,8 @@ import { RequestsProvider } from "../../providers/requests/requests";
 })
 export class ChatsPage {
 
-  myrequests = [];
+  myRequests = [];
+  myFriends = [];
 
   constructor(public navCtrl: NavController,
               private appService: AppProvider,
@@ -21,9 +22,20 @@ export class ChatsPage {
   ionViewWillEnter() {
     this.requestService.getMyRequests();
     this.events.subscribe('gotrequests', () => {
-      this.myrequests = [];
-      this.myrequests = this.requestService.userDetails;
+      this.myRequests = [];
+      this.myRequests = this.requestService.userDetails;
+    });
+    this.requestService.getMyFriends();
+    this.events.subscribe('friends', () => {
+      this.myFriends = [];
+      this.myFriends = this.requestService.myFriends; 
+      console.log("SASASA", this.myFriends);
     })
+  }
+
+  ionViewDidLeave() {
+    this.events.unsubscribe('gotrequests');
+    this.events.unsubscribe('friends');
   }
 
   addBuddy() {
@@ -33,6 +45,9 @@ export class ChatsPage {
   accept(buddy) {
     this.requestService.acceptRequest(buddy).then((res) => {
       console.log("SASAS", res);
+      const title = "Friend Added";
+      const subTitle = "Tap on the friend to chat with him";
+      this.appService.presentAlert(title, subTitle);
     });
   }
 

@@ -8,7 +8,9 @@ import { Events } from "ionic-angular";
 export class RequestsProvider {
 
   firereq = firebase.database().ref('/requests');
+  firefriends = firebase.database().ref('/friends');
   userDetails = [];
+  myFriends = [];
 
   constructor(private userService: UserProvider,
               private events: Events) {
@@ -70,10 +72,11 @@ export class RequestsProvider {
 
   acceptRequest(buddy) {
     var promise = new Promise((resolve, reject) => {
-      this.firereq.child(firebase.auth().currentUser.uid).push({
+      this.myFriends = [];
+      this.firefriends.child(firebase.auth().currentUser.uid).push({
         uid: buddy.uid
       }).then((res) => {
-        this.firereq.child(buddy.uid).push({
+        this.firefriends.child(buddy.uid).push({
           uid: firebase.auth().currentUser.uid
         }).then((res) => {
           this.deleteRequest(buddy).then((res) => {
@@ -89,6 +92,29 @@ export class RequestsProvider {
       })
     });
     return promise;
+  }
+
+  getMyFriends() {
+    this.firefriends.child(firebase.auth().currentUser.uid).once("value", (snapshot) => {
+      let allFriends = snapshot.val();
+      let friends_uid = [];
+      for(let i in allFriends) {
+        friends_uid.push(allFriends[i].uid);
+      }
+      this.userService.getAllUsers().then((users) => {
+        this.myFriends = [];
+        for(let j in friends_uid) {
+          for(let key in users) {
+            if(friends_uid[j] === users[key].uid) {
+              this.myFriends.push(users[key]);
+            }
+          }
+        }
+        this.events.publish("friends");
+      }).catch((err) => {
+        alert(err);
+      });
+    });
   }
 
 }
