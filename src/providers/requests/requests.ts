@@ -54,18 +54,39 @@ export class RequestsProvider {
 
   deleteRequest(buddy) {
     var promise = new Promise((resolve, reject) => {
-      this.firereq.child(firebase.auth().currentUser.uid).orderByChild("sender").once("value", (snapshot) => {
-        console.log("SAS", snapshot.val());
+      this.firereq.child(firebase.auth().currentUser.uid).orderByChild("sender").equalTo(buddy.uid).once("value", (snapshot) => {
         let somekey;
-        for (var key in snapshot.val()) {
+        for (var key in snapshot.val())
           somekey = key;
-        }
         this.firereq.child(firebase.auth().currentUser.uid).child(somekey).remove().then(() => {
           resolve(true);
         }).catch((err) => {
           reject(err);
         });
       });
+    });
+    return promise;
+  }
+
+  acceptRequest(buddy) {
+    var promise = new Promise((resolve, reject) => {
+      this.firereq.child(firebase.auth().currentUser.uid).push({
+        uid: buddy.uid
+      }).then((res) => {
+        this.firereq.child(buddy.uid).push({
+          uid: firebase.auth().currentUser.uid
+        }).then((res) => {
+          this.deleteRequest(buddy).then((res) => {
+            resolve(res);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }).catch((err) => {
+        reject(err);
+      })
     });
     return promise;
   }

@@ -30,6 +30,12 @@ export class ChatsPage {
     this.navCtrl.push('BuddiesPage');
   }
 
+  accept(buddy) {
+    this.requestService.acceptRequest(buddy).then((res) => {
+      console.log("SASAS", res);
+    });
+  }
+
   ignore(buddy) {
     console.log(buddy);
     this.requestService.deleteRequest(buddy).then((res) => {
