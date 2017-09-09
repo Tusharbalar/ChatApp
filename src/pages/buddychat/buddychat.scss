@@ -1,4 +1,25 @@
 page-buddychat {
+
+  .img_me {
+    img {
+      top: 16px;
+      bottom: 0;
+      position: absolute;
+    }
+  }
+
+  .img_you {
+    img {
+      top: 16px;
+      bottom: 0;
+      position: absolute;
+    }
+  }
+
+  .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
+    margin: 8px 8px 8px 0;
+  }
+
   .chat {
     width: 320px;
   }
@@ -30,7 +51,7 @@ page-buddychat {
   
   .me {
     float: left;   
-    margin: 5px 45px 5px 20px;         
+    margin: 5px 45px 5px 19px;       
   }
   
   .me::before {

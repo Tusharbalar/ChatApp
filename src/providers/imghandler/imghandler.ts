@@ -27,4 +27,23 @@ export class ImageHandlerProvider {
     return promise;
   }
 
+  public picMsgStore() {
+    var promise = new Promise((resolve, reject) => {
+      this.camera.getPicture({
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true
+      }).then((imagedata) => {
+        firebase.storage().ref('/picmsgs').child(firebase.auth().currentUser.uid).child("picmsg")
+          .putString(imagedata, 'base64', {contentType: 'image/png'})
+          .then(savePic => {
+            resolve(savePic.downloadURL);
+          }).catch((err) => {
+            reject(err);
+          });
+      });
+    });
+    return promise;
+  }
+
 }
