@@ -25,7 +25,8 @@
 </ion-content>
 <ion-footer ion-fixed>
   <ion-toolbar class="no-border" color="white">
-    <textarea #myInput id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="newMessage" placeholder="Write your message ..."></textarea>
+    <!-- <textarea #myInput id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="newMessage" placeholder="Write your message ..."></textarea> -->
+    <ion-input [(ngModel)]="newMessage" placeholder="Write your message ..."></ion-input> 
     <ion-buttons end>
       <button ion-button (click)="addMessage()" [disabled]="!newMessage">
         <ion-icon name="md-send" color="primary"></ion-icon>

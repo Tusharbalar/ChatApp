@@ -12,34 +12,33 @@ import firebase from "firebase";
 export class BuddychatPage {
 
   buddy: any;
-  newMessage;
+  newMessage = "";
   photoURL;
   allMessages;
 
   @ViewChild('content') content: Content;
-  @ViewChild('myInput') myInput: ElementRef;
-
+  
   constructor(public navCtrl: NavController,
-              private chatService: ChatProvider,
-              private events: Events,
-              private zone: NgZone,
-              public navParams: NavParams) {
-    this.buddy = this.chatService.buddy;
-    this.photoURL = firebase.auth().currentUser.photoURL;
-    this.scrollto();
-    this.events.subscribe('newmessage', () => {
-      this.allMessages = [];
-      this.zone.run(() => {
-        this.allMessages = this.chatService.buddyMessages;
-        this.scrollto();
-      })
-    });
-  }
-
-  resize() {
-    console.log(this.newMessage)
-    this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
-  }
+    private chatService: ChatProvider,
+    private events: Events,
+    private zone: NgZone,
+    public navParams: NavParams) {
+      this.buddy = this.chatService.buddy;
+      this.photoURL = firebase.auth().currentUser.photoURL;
+      this.scrollto();
+      this.events.subscribe('newmessage', () => {
+        this.allMessages = [];
+        this.zone.run(() => {
+          this.allMessages = this.chatService.buddyMessages;
+          this.scrollto();
+        })
+      });
+    }
+    
+  // @ViewChild('myInput') myInput: ElementRef;
+  // resize() {
+  //   this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
+  // }
 
   ionViewDidEnter() {
     this.chatService.getBuddyMessages();
