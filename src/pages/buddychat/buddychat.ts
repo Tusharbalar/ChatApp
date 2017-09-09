@@ -39,6 +39,7 @@ export class BuddychatPage {
   }
 
   addMessage() {
+    if (!this.newMessage) { return; }
     this.chatService.addNewMessage(this.newMessage).then(() => {
       this.newMessage = "";
       this.content.scrollToBottom();
