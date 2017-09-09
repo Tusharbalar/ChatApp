@@ -14,13 +14,13 @@
       Requests
     </ion-list-header>
     <ion-item-sliding *ngFor="let item of myRequests">
-      <ion-item>
+      <a ion-item detail-push detail-none (click)="doSomething(item)">
         <ion-avatar item-left>
           <img src="{{item.photoURL}}">
         </ion-avatar>
         <h4>{{item.displayName}}</h4>
-      </ion-item>
-      <ion-item-options>
+      </a>
+      <ion-item-options side="right">
         <button ion-button color="secondary" (click)="accept(item)">
           <ion-icon name="checkmark"></ion-icon> ADD
         </button>

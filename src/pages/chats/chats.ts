@@ -65,4 +65,8 @@ export class ChatsPage {
     this.navCtrl.push('BuddychatPage');
   }
 
+  doSomething(item) {
+    console.log(item)
+  }
+
 }
