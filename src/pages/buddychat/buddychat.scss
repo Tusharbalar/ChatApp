@@ -16,8 +16,14 @@ page-buddychat {
     }
   }
 
-  .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
+  .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start],
+  .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start] {
     margin: 8px 8px 8px 0;
+  }
+
+  .item-ios ion-avatar[item-right], .item-ios ion-thumbnail[item-right], .item-ios ion-avatar[item-end], .item-ios ion-thumbnail[item-end],
+  .item-md ion-avatar[item-right], .item-md ion-thumbnail[item-right], .item-md ion-avatar[item-end], .item-md ion-thumbnail[item-end] {
+    margin: 0px 7px 0px 0px;
   }
 
   .chat {
