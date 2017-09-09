@@ -34,7 +34,8 @@ export class ImageHandlerProvider {
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         allowEdit: true
       }).then((imagedata) => {
-        firebase.storage().ref('/picmsgs').child(firebase.auth().currentUser.uid).child("picmsg")
+        var uuid = this.guid();
+        firebase.storage().ref('/picmsgs').child(firebase.auth().currentUser.uid).child("picmsg" + uuid)
           .putString(imagedata, 'base64', {contentType: 'image/png'})
           .then(savePic => {
             resolve(savePic.downloadURL);
@@ -44,6 +45,16 @@ export class ImageHandlerProvider {
       });
     });
     return promise;
+  }
+
+  guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
   }
 
 }
