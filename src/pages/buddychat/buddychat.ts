@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { ChatProvider } from "../../providers/chat/chat";
 import firebase from "firebase";
@@ -17,6 +17,7 @@ export class BuddychatPage {
   allMessages;
 
   @ViewChild('content') content: Content;
+  @ViewChild('myInput') myInput: ElementRef;
 
   constructor(public navCtrl: NavController,
               private chatService: ChatProvider,
@@ -30,15 +31,21 @@ export class BuddychatPage {
       this.allMessages = [];
       this.zone.run(() => {
         this.allMessages = this.chatService.buddyMessages;
+        this.scrollto();
       })
     });
+  }
+
+  resize() {
+    console.log(this.newMessage)
+    this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
   }
 
   ionViewDidEnter() {
     this.chatService.getBuddyMessages();
   }
 
-  addMessage() {
+  addMessage(a) {
     if (!this.newMessage) { return; }
     this.chatService.addNewMessage(this.newMessage).then(() => {
       this.newMessage = "";

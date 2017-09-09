@@ -51,4 +51,12 @@ page-buddychat {
   .chatwindow {
     padding-bottom: 70px;
   }
+
+  #myInput {
+    width: calc(100% - 10px);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    max-height: 67px;
+  }
 }
