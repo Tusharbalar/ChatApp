@@ -21,4 +21,12 @@
       <h3>{{item.displayName}}</h3>
     </a>
   </ion-list>
+  <ion-list class="no-comment" *ngIf="showEmptyMsg">
+    <ion-icon name="chatbubbles"></ion-icon>
+    <br>NO CHATS FOUND
+    <br>
+    <button ion-button clear item-start icon-right (click)="addBuddy()">
+      Add Friend <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </ion-list>
 </ion-content>

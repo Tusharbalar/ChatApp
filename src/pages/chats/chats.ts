@@ -13,6 +13,7 @@ export class ChatsPage implements OnInit {
 
   myFriends = [];
   showLoader: boolean;
+  showEmptyMsg = false;
 
   constructor(public navCtrl: NavController,
               private events: Events,
@@ -30,11 +31,15 @@ export class ChatsPage implements OnInit {
 
   getFridens() {
     this.showLoader = true;
+    this.showEmptyMsg = false;
     this.requestService.getMyFriends();
     this.events.subscribe('friends', () => {
       this.myFriends = [];
       this.myFriends = this.requestService.myFriends; 
       this.showLoader = false;
+      if (this.myFriends.length == 0) {
+        this.showEmptyMsg = true;
+      }
     });
   }
 
