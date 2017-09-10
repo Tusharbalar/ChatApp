@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-spinner class="spinner-center"></ion-spinner>
+  <ion-spinner class="spinner-center" *ngIf="showLoader"></ion-spinner>
   <ion-list>
     <ion-item-sliding *ngFor="let item of myRequests">
       <a ion-item detail-push detail-none (click)="doSomething(item)">
@@ -22,5 +22,9 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
+  </ion-list>
+  <ion-list class="no-comment" *ngIf="showEmptyMsg">
+    <ion-icon name="megaphone"></ion-icon>
+    <br>NO FRIEND REQUEST
   </ion-list>
 </ion-content>

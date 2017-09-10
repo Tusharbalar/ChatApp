@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, Events } from 'ionic-angular';
 import { AppProvider } from "../../providers/common";
 import { RequestsProvider } from "../../providers/requests/requests";
@@ -9,20 +9,28 @@ import { RequestsProvider } from "../../providers/requests/requests";
   templateUrl: 'requests.html',
 })
 
-export class RequestsPage {
+export class RequestsPage implements OnInit {
 
   myRequests = [];
+  showLoader: boolean;
+  showEmptyMsg = false;
 
   constructor(private appService: AppProvider,
               private events: Events,
               private requestService: RequestsProvider) {
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
+    this.showLoader = true;
+    this.showEmptyMsg = false;
     this.requestService.getMyRequests();
     this.events.subscribe('gotrequests', () => {
       this.myRequests = [];
       this.myRequests = this.requestService.userDetails;
+      if (this.myRequests.length == 0) {
+        this.showEmptyMsg = true;
+      }
+      this.showLoader = false;
     });
   }
 

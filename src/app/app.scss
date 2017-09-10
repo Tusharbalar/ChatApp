@@ -32,3 +32,15 @@ ion-spinner * {
 .spinner-md-crescent circle {
   stroke: #03b6b3;
 }
+
+.no-comment {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:20vh;
+  color:dimgray;
+  text-align:center;
+  ion-icon{
+    font-size:100px;
+  }
+}
