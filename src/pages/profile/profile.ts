@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { UserProvider } from "../../providers/user/user";
 import { AppProvider } from "../../providers/common";
@@ -12,12 +12,13 @@ import { ImageHandlerProvider } from "../../providers/imghandler/imghandler";
   templateUrl: 'profile.html',
 })
 
-export class ProfilePage {
+export class ProfilePage implements OnInit {
 
   avatar: string;
   displayName: string;
   emailId: string;
   isEditName = false;
+  showLoader: boolean;
   isEditEmail = false;
 
   constructor(public navCtrl: NavController,
@@ -29,14 +30,14 @@ export class ProfilePage {
               public userService: UserProvider) {
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.getUserDetails();
   }
 
   getUserDetails() {
-    this.appService.presentLoadingDefault("Loading Profile Data...");
+    this.showLoader = true;
     this.userService.getUserDetails().then((res: any) => {
-      this.appService.hideLoadingDefault();
+      this.showLoader = false;
       if (res) {
         this.displayName = res.displayName;
         this.avatar = res.photoURL;
@@ -46,7 +47,6 @@ export class ProfilePage {
         this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
       }
     }).catch((err) => {
-      this.appService.hideLoadingDefault();
       this.displayName = this.angularFireAuth.auth.currentUser.displayName;
       this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
     })

@@ -4,10 +4,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div class="profile-image" (click)="editImage()">
+  <ion-spinner class="spinner-center" *ngIf="showLoader"></ion-spinner>
+  <div class="profile-image" (click)="editImage()" *ngIf="displayName">
     <img src="{{avatar}}">
   </div>
-  <ion-list>
+  <ion-list *ngIf="displayName">
     <ion-item style="margin-top: 30px;color:#03b6b3">
       <ion-icon name='contact' item-start></ion-icon>
       {{displayName}}
