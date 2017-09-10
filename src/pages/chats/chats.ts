@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, Events } from 'ionic-angular';
 import { RequestsProvider } from "../../providers/requests/requests";
 import { ChatProvider } from "../../providers/chat/chat";
@@ -9,9 +9,10 @@ import { ChatProvider } from "../../providers/chat/chat";
   templateUrl: 'chats.html',
 })
 
-export class ChatsPage {
+export class ChatsPage implements OnInit {
 
   myFriends = [];
+  showLoader: boolean;
 
   constructor(public navCtrl: NavController,
               private events: Events,
@@ -19,16 +20,22 @@ export class ChatsPage {
               private requestService: RequestsProvider) {
   }
 
-  ionViewWillEnter() {
-    this.requestService.getMyFriends();
-    this.events.subscribe('friends', () => {
-      this.myFriends = [];
-      this.myFriends = this.requestService.myFriends; 
-    });
+  ngOnInit() {
+    this.getFridens();
   }
 
   ionViewDidLeave() {
     this.events.unsubscribe('friends');
+  }
+
+  getFridens() {
+    this.showLoader = true;
+    this.requestService.getMyFriends();
+    this.events.subscribe('friends', () => {
+      this.myFriends = [];
+      this.myFriends = this.requestService.myFriends; 
+      this.showLoader = false;
+    });
   }
 
   addBuddy() {
@@ -38,6 +45,17 @@ export class ChatsPage {
   buddyChat(buddy) {
     this.chatService.initBuddy(buddy);
     this.navCtrl.push('BuddychatPage');
+  }
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.requestService.getMyFriends();
+      this.events.subscribe('friends', () => {
+        this.myFriends = [];
+        this.myFriends = this.requestService.myFriends; 
+        refresher.complete();
+      });
+    }, 500);
   }
 
 }

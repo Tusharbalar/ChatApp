@@ -9,6 +9,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-spinner class="spinner-center" *ngIf="showLoader"></ion-spinner>
   <ion-list>
     <a *ngFor="let item of myFriends" ion-item detail-push detail-none (click)="buddyChat(item)">
       <ion-avatar item-left>
