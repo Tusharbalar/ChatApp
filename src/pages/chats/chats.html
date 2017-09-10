@@ -10,28 +10,6 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Requests
-    </ion-list-header>
-    <ion-item-sliding *ngFor="let item of myRequests">
-      <a ion-item detail-push detail-none (click)="doSomething(item)">
-        <ion-avatar item-left>
-          <img src="{{item.photoURL}}">
-        </ion-avatar>
-        <h4>{{item.displayName}}</h4>
-      </a>
-      <ion-item-options side="right">
-        <button ion-button color="secondary" (click)="accept(item)">
-          <ion-icon name="checkmark"></ion-icon> ADD
-        </button>
-        <button ion-button color="danger" (click)="ignore(item)">
-          <ion-icon name="trash"></ion-icon> NOPE
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-list-header>
-      Friends
-    </ion-list-header>
     <a *ngFor="let item of myFriends" ion-item detail-push detail-none (click)="buddyChat(item)">
       <ion-avatar item-left>
         <img src={{item.photoURL}}>
