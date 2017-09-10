@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="hcolor">
-    <ion-title>Requests</ion-title>
+    <ion-title>Friend Requests</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -26,5 +26,9 @@
   <ion-list class="no-comment" *ngIf="showEmptyMsg">
     <ion-icon name="megaphone"></ion-icon>
     <br>NO FRIEND REQUEST
+    <br>
+    <button ion-button clear item-start icon-right (click)="addBuddy()">
+      Add Friend <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
   </ion-list>
 </ion-content>

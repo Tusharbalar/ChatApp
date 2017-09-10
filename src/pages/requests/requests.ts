@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, Events } from 'ionic-angular';
+import { IonicPage, Events, NavController } from 'ionic-angular';
 import { AppProvider } from "../../providers/common";
 import { RequestsProvider } from "../../providers/requests/requests";
 
@@ -16,6 +16,7 @@ export class RequestsPage implements OnInit {
   showEmptyMsg = false;
 
   constructor(private appService: AppProvider,
+              private navCtrl: NavController,
               private events: Events,
               private requestService: RequestsProvider) {
   }
@@ -55,6 +56,10 @@ export class RequestsPage implements OnInit {
 
   doSomething(item) {
     console.log(item)
+  }
+
+  addBuddy() {
+    this.navCtrl.push('BuddiesPage');
   }
 
 }
