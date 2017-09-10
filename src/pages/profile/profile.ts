@@ -16,7 +16,9 @@ export class ProfilePage {
 
   avatar: string;
   displayName: string;
+  emailId: string;
   isEditName = false;
+  isEditEmail = false;
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
@@ -38,6 +40,7 @@ export class ProfilePage {
       if (res) {
         this.displayName = res.displayName;
         this.avatar = res.photoURL;
+        this.emailId = res.emailId;
       } else {
         this.displayName = this.angularFireAuth.auth.currentUser.displayName;
         this.avatar = this.angularFireAuth.auth.currentUser.photoURL;
@@ -79,6 +82,10 @@ export class ProfilePage {
       }]
     });
     prompt.present();
+  }
+
+  editEmail() {
+
   }
 
   editImage() {

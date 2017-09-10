@@ -7,19 +7,28 @@
   <div class="profile-image" (click)="editImage()">
     <img src="{{avatar}}">
   </div>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-right (click)="editName()" class="btn_transparent">
-          <b>{{displayName}}</b>&nbsp;
-          <i class="fa fa-pencil" *ngIf="!isEditName"></i>
-          <ion-spinner *ngIf="isEditName"></ion-spinner>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <div class="spacer" style="height: 10px;"></div>
-  <div>
-    <button ion-button round outline color="danger" (click)="logout()">Logout</button>
-  </div>
+  <ion-list>
+    <ion-item style="margin-top: 30px;color:#03b6b3">
+      <ion-icon name='contact' item-start></ion-icon>
+      {{displayName}}
+      <button ion-button item-end outline (click)="editName()" *ngIf="!isEditName" color="hcolor">
+        Edit
+      </button>
+      <ion-spinner *ngIf="isEditName" class="btn-spinner"></ion-spinner>
+    </ion-item>
+    <ion-item style="color:#03b6b3">
+      <ion-icon name='mail' item-start></ion-icon>
+      {{emailId}}
+      <button ion-button item-end outline (click)="editEmail()" *ngIf="!isEditEmail" color="hcolor">
+        Edit
+      </button>
+      <ion-spinner *ngIf="isEditEmail" class="btn-spinner"></ion-spinner>
+    </ion-item>
+    <ion-item>
+      <button class="btn-logout" ion-button item-start icon-right full clear (click)="logout()">
+        LOGOUT
+      <ion-icon name='md-log-out'></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -36,4 +36,14 @@ page-profile {
   .button-md {
     box-shadow: none;
   }
+  .btn-spinner {
+    width: 15px;
+    height: 15px;
+    float: right;
+  }
+  .btn-logout {
+    font-size: 2rem !important;
+    font-weight: 500;
+    color: #f53d3d;
+  }
 }

@@ -20,6 +20,7 @@ export class UserProvider {
           this.firedata.child(this.angularFireAuth.auth.currentUser.uid).set({
             uid: this.angularFireAuth.auth.currentUser.uid,
             displayName: newuser.displayName,
+            emailId: newuser.email,
             photoURL: 'https://static1.squarespace.com/static/557d1981e4b097936a86b629/t/558cf487e4b05d368538793a/1435301000191/'
           }).then(() => {
             resolve({ success: true });
