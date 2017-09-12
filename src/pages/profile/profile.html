@@ -9,7 +9,7 @@
     <img src="{{avatar}}">
   </div>
   <ion-list *ngIf="displayName">
-    <ion-item style="margin-top: 30px;color:#03b6b3">
+    <ion-item class="primary-color" style="margin-top: 30px;">
       <ion-icon name='contact' item-start></ion-icon>
       {{displayName}}
       <button ion-button item-end outline (click)="editName()" *ngIf="!isEditName" color="hcolor">
@@ -17,7 +17,7 @@
       </button>
       <ion-spinner *ngIf="isEditName" class="btn-spinner"></ion-spinner>
     </ion-item>
-    <ion-item style="color:#03b6b3">
+    <ion-item class="primary-color">
       <ion-icon name='mail' item-start></ion-icon>
       {{emailId}}
       <button ion-button item-end outline (click)="editEmail()" *ngIf="!isEditEmail" color="hcolor">
