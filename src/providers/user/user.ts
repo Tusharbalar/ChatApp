@@ -103,6 +103,21 @@ export class UserProvider {
     return promise;
   }
 
+  editEmail(newEmail) {
+    var promise = new Promise((resolve, reject) => {
+      this.firedata.child(this.angularFireAuth.auth.currentUser.uid).update({
+        emailId: newEmail,
+        photoURL: this.angularFireAuth.auth.currentUser.photoURL,
+        uid: this.angularFireAuth.auth.currentUser.uid
+      }).then(() => {
+        resolve({ success: true});
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+    return promise;
+  }
+
   getAllUsers() {
     var promise = new Promise((resolve, reject) => {
       this.firedata.orderByChild('uid').once('value', (snapshot) => {

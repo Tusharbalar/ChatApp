@@ -85,7 +85,35 @@ export class ProfilePage implements OnInit {
   }
 
   editEmail() {
-
+    let prompt = this.alertCtrl.create({
+      title: 'Edit Email-Id',
+      inputs: [{
+        name: 'newEmail',
+        value: this.emailId
+      }],
+      buttons: [{
+        text: 'Cancel',
+        handler: data => {
+        }
+      }, {
+        text: 'Save',
+        handler: data => {
+          console.log('Saved clicked', data);
+          this.emailId = data.newEmail;
+          this.isEditEmail = true;
+          this.userService.editEmail(data.newEmail).then((res: any) => {
+            this.isEditEmail = false;
+            if (!res.success) {
+              // this.emailId = this.angularFireAuth.auth.currentUser.emailId;
+              this.appService.showToast("Email-Id not update " + this.emailId);
+            }
+          }).catch((err) => {
+            this.isEditEmail = false;
+          });
+        }
+      }]
+    });
+    prompt.present();
   }
 
   editImage() {
