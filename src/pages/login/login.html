@@ -17,6 +17,20 @@
         <a (click)="passwordreset()">Forgot login details ? <b> Get Help </b></a>
         <div class="spacer" style="height: 10px;"></div>
         <button ion-button block round outline color="light" (click)="signin()">Login</button>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <div class="btn-google" style="float:right">
+                <img src="assets/images/google.png" (click)="googleLogin()">
+              </div>
+            </ion-col>
+            <ion-col col-6>
+              <div class="btn-google">
+                <img src="assets/images/facebook.png" (click)="facebookLogin()">
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
         <div class="spacer" style="height: 10px;"></div>
         <p>OR</p>
         <div class="spacer" style="height: 10px;"></div>

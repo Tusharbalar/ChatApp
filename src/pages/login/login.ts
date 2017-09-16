@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { usercreds } from '../../models/interfaces/usercreds';
 import { AuthProvider } from "../../providers/auth/auth";
 import { AppProvider } from "../../providers/common";
+import { AngularFireAuth } from "angularfire2/auth";
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -20,8 +22,20 @@ export class LoginPage {
 
   constructor(public authService: AuthProvider,
               public navCtrl: NavController,
+              public angularFireAuth: AngularFireAuth,
               public appService: AppProvider,
               public navParams: NavParams) {
+  }
+
+  googleLogin() {
+    this.angularFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  facebookLogin() {
+    // this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    const title = "Ohh No";
+    const subTitle = "This feature is under construction."
+    this.appService.presentAlert(title, subTitle);
   }
  
   signin() {
